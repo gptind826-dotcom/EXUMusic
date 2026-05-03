@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EXU Music — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/dashboard.css"/>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+        </svg>
+      </div>
+      <span class="logo-text">EXU Music</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" onclick="showSection('dashboard',this);return false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('credentials',this);return false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Credentials
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('images',this);return false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>
+        Images
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('session',this);return false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Generate Session
+      </a>
+      <a href="https://t.me/exucodex" target="_blank" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Support
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="status-dot online"></div>
+      <span>Bot Online</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title" id="page-heading">Dashboard</h1>
+        <span class="page-subtitle" id="page-sub">EXU Music Bot Control Panel</span>
+      </div>
+      <div class="topbar-right">
+        <div class="timestamp" id="clock">—</div>
+        <div class="badge-live"><span class="pulse"></span>Live</div>
+      </div>
+    </header>
+
+    <!-- ── DASHBOARD ───────────────────────────── -->
+    <div id="section-dashboard">
+      <section class="stats-grid">
+        <div class="stat-card accent-purple">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="stat-body"><span class="stat-label">Uptime</span><span class="stat-value" id="uptime">—</span></div>
+        </div>
+        <div class="stat-card accent-cyan">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="stat-body"><span class="stat-label">CPU Usage</span><span class="stat-value" id="cpu">—</span></div>
+        </div>
+        <div class="stat-card accent-green">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div class="stat-body"><span class="stat-label">RAM</span><span class="stat-value" id="ram">—</span></div>
+        </div>
+        <div class="stat-card accent-orange">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <div class="stat-body"><span class="stat-label">Disk</span><span class="stat-value" id="disk">—</span></div>
+        </div>
+      </section>
+
+      <section class="panels-row">
+        <div class="panel">
+          <div class="panel-header"><h2 class="panel-title">System Performance</h2></div>
+          <div class="meters">
+            <div class="meter-row">
+              <div class="meter-info"><span>CPU</span><span class="meter-val" id="cpu-pct">0%</span></div>
+              <div class="meter-bar"><div class="meter-fill cpu-fill" id="cpu-bar" style="width:0%"></div></div>
+            </div>
+            <div class="meter-row">
+              <div class="meter-info"><span>RAM</span><span class="meter-val" id="ram-pct">0%</span></div>
+              <div class="meter-bar"><div class="meter-fill ram-fill" id="ram-bar" style="width:0%"></div></div>
+            </div>
+            <div class="meter-row">
+              <div class="meter-info"><span>Disk</span><span class="meter-val" id="disk-pct">0%</span></div>
+              <div class="meter-bar"><div class="meter-fill disk-fill" id="disk-bar" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h2 class="panel-title">Bot Information</h2></div>
+          <ul class="info-list">
+            <li><span class="info-label">Bot Name</span><span class="info-val" id="bot-name">—</span></li>
+            <li><span class="info-label">Username</span><span class="info-val" id="bot-username">—</span></li>
+            <li><span class="info-label">Status</span><span class="info-val status-online" id="bot-status">Online</span></li>
+            <li><span class="info-label">Owner</span><span class="info-val" id="bot-owner">—</span></li>
+            <li><span class="info-label">Assistant</span><span class="info-val" id="bot-assistant">—</span></li>
+            <li><span class="info-label">Python</span><span class="info-val" id="python-ver">—</span></li>
+            <li><span class="info-label">Platform</span><span class="info-val" id="platform">—</span></li>
+            <li><span class="info-label">Last Refresh</span><span class="info-val" id="last-refresh">—</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panels-row">
+        <div class="panel wide-panel">
+          <div class="panel-header"><h2 class="panel-title">Quick Actions</h2></div>
+          <div class="actions-grid">
+            <a href="https://t.me/exucodex" target="_blank" class="action-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              Telegram Channel
+            </a>
+            <a href="/health" target="_blank" class="action-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Health Check
+            </a>
+            <a href="#" onclick="showSection('credentials',document.querySelectorAll('.nav-item')[1]);return false" class="action-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Edit Credentials
+            </a>
+            <a href="#" onclick="showSection('images',document.querySelectorAll('.nav-item')[2]);return false" class="action-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>
+              Bot Images
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ── CREDENTIALS ─────────────────────────── -->
+    <div id="section-credentials" style="display:none">
+      <div class="notice notice-warn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Values are saved to <code>.env</code> immediately. <strong>Restart the bot</strong> to apply changes.
+      </div>
+
+      <!-- Bot Identity -->
+      <div class="cred-section">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>
+          Bot Identity
+        </div>
+        <div class="cred-grid" id="cred-identity"></div>
+      </div>
+
+      <!-- Database -->
+      <div class="cred-section">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          Database
+        </div>
+        <div class="cred-grid" id="cred-database"></div>
+      </div>
+
+      <!-- Bot Settings -->
+      <div class="cred-section">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 4.93 19.07M19.07 19.07A10 10 0 0 0 4.93 4.93"/></svg>
+          Bot Settings
+        </div>
+        <div class="cred-grid" id="cred-settings"></div>
+      </div>
+
+      <div class="cred-section">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Session Strings (Assistant Accounts)
+        </div>
+        <div class="notice notice-info" style="margin-bottom:16px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 16.92-.39 4.88-5 1.2a15.93 15.93 0 0 1-11-4.52 15.93 15.93 0 0 1-4.52-11l1.2-5 4.88-.39"/></svg>
+          Paste a valid session string here. It will be masked after saving.
+        </div>
+        <div class="cred-grid" id="cred-sessions"></div>
+      </div>
+
+      <!-- Optional -->
+      <div class="cred-section">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          Optional / Integrations
+        </div>
+        <div class="cred-grid" id="cred-optional"></div>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn-save" onclick="saveAllCredentials()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save All Changes
+        </button>
+        <span class="save-feedback" id="cred-feedback"></span>
+      </div>
+    </div>
+
+    <!-- ── GENERATE SESSION ────────────────────── -->
+    <div id="section-session" style="display:none">
+      <div class="notice notice-info">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Enter your phone number to receive an OTP from Telegram. This generates a fresh session string using the same API credentials as the bot and saves it automatically.
+      </div>
+
+      <div class="cred-section" id="gen-step-phone">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.5 6.5l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Step 1 — Enter Phone Number
+        </div>
+        <div class="cred-grid" style="max-width:420px">
+          <div class="cred-field" style="grid-column:1/-1">
+            <div class="cred-field-top"><span class="cred-label">Phone Number</span></div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:8px">Include country code, e.g. +1234567890</div>
+            <div class="cred-input-wrap">
+              <input class="cred-input" id="gen-phone" type="tel" placeholder="+1234567890" />
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <button class="btn-save" onclick="genSendOtp(this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send OTP
+          </button>
+          <span class="save-feedback" id="gen-phone-fb"></span>
+        </div>
+      </div>
+
+      <div class="cred-section" id="gen-step-otp" style="display:none">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Step 2 — Enter OTP &amp; Password
+        </div>
+        <div class="cred-grid" style="max-width:420px">
+          <div class="cred-field" style="grid-column:1/-1">
+            <div class="cred-field-top"><span class="cred-label">OTP Code</span></div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:8px">The code Telegram sent to your app or SMS</div>
+            <div class="cred-input-wrap">
+              <input class="cred-input" id="gen-otp" type="text" placeholder="12345" autocomplete="one-time-code" />
+            </div>
+          </div>
+          <div class="cred-field" style="grid-column:1/-1">
+            <div class="cred-field-top"><span class="cred-label">2FA Password (optional)</span></div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:8px">Only needed if your account has Two-Step Verification enabled</div>
+            <div class="cred-input-wrap">
+              <input class="cred-input is-secret" id="gen-pass" type="password" placeholder="Leave blank if no 2FA" />
+              <button class="eye-btn" type="button" onclick="toggleEye(this)" title="Show/hide">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <button class="btn-save" onclick="genFinishOtp(this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+            Verify &amp; Save Session
+          </button>
+          <span class="save-feedback" id="gen-otp-fb"></span>
+        </div>
+      </div>
+
+      <div class="cred-section" id="gen-step-done" style="display:none">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Session Generated Successfully
+        </div>
+        <div class="notice notice-info">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          <span id="gen-done-msg">Session saved. Restart the bot to activate voice chat.</span>
+        </div>
+        <div style="margin-top:16px">
+          <button class="btn-save" onclick="genReset()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+            Generate Another
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── IMAGES ───────────────────────────────── -->
+    <div id="section-images" style="display:none">
+      <div class="notice notice-warn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Paste direct image URLs (must start with <code>https://</code>). Restart the bot to apply.
+      </div>
+      <div class="cred-section">
+        <div class="cred-section-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>
+          Bot Images
+        </div>
+        <div class="img-grid" id="img-grid"></div>
+      </div>
+      <div class="save-bar">
+        <button class="btn-save" onclick="saveAllImages()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save Image URLs
+        </button>
+        <span class="save-feedback" id="img-feedback"></span>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>EXU Music Bot &copy; 2024 — Built with Flask &amp; Pyrogram</span>
+      <a href="https://t.me/exucodex" target="_blank">@exucodex</a>
+    </footer>
+  </main>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
